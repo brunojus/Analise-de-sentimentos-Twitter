@@ -1,0 +1,721 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Classificador 4 Algoritmos - TextBlob}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{collections}
+        \PY{k+kn}{import} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{classify}\PY{n+nn}{.}\PY{n+nn}{util}\PY{o}{,} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{classify} \PY{k}{import} \PY{n}{NaiveBayesClassifier}\PY{p}{,} \PY{n}{MaxentClassifier}\PY{p}{,} \PY{n}{SklearnClassifier}\PY{p}{,} \PY{n}{DecisionTreeClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{cross\PYZus{}validation}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}\PY{p}{,} \PY{n}{SVC}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{stopwords}
+        \PY{k+kn}{import} \PY{n+nn}{itertools}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{collocations} \PY{k}{import} \PY{n}{BigramCollocationFinder}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{BigramAssocMeasures}
+        \PY{k+kn}{from} \PY{n+nn}{nltk} \PY{k}{import} \PY{n}{precision}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{spearman}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{paice}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{scores}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+         
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}TextBlob\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 'TextBlob'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{posdata} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/bruno/Documents/artigo/R/Sentiment/positive\PYZus{}textblob.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{myfile}\PY{p}{:}    
+            \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{myfile}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{for} \PY{n}{val} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                \PY{n}{posdata}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}        
+         
+         
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{neudata} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/bruno/Documents/artigo/R/Sentiment/neutral\PYZus{}textblob.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{myfile}\PY{p}{:}    
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{myfile}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{val} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{neudata}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{negdata} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/bruno/Documents/artigo/R/Sentiment/negative\PYZus{}textblob.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{myfile}\PY{p}{:}    
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{myfile}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{val} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{negdata}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{word\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}    
+             \PY{n}{data\PYZus{}new} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{n}{word\PYZus{}filter} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{word}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{data\PYZus{}new}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{word\PYZus{}filter}\PY{p}{)}
+             \PY{k}{return} \PY{n}{data\PYZus{}new}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{word\PYZus{}split\PYZus{}sentiment}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data\PYZus{}new} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{n}{sentiment}\PY{p}{)} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{n}{word\PYZus{}filter} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{word}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{data\PYZus{}new}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{word\PYZus{}filter}\PY{p}{,} \PY{n}{sentiment}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{data\PYZus{}new}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{word\PYZus{}feats}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{:}    
+             \PY{k}{return} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)} \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{words}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{stopset} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{portuguese}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{stopword\PYZus{}filtered\PYZus{}word\PYZus{}feats}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{word}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)} \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{words} \PY{k}{if} \PY{n}{word} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{stopset}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{bigram\PYZus{}word\PYZus{}feats}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{score\PYZus{}fn}\PY{o}{=}\PY{n}{BigramAssocMeasures}\PY{o}{.}\PY{n}{chi\PYZus{}sq}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bigram\PYZus{}finder} \PY{o}{=} \PY{n}{BigramCollocationFinder}\PY{o}{.}\PY{n}{from\PYZus{}words}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+             \PY{n}{bigrams} \PY{o}{=} \PY{n}{bigram\PYZus{}finder}\PY{o}{.}\PY{n}{nbest}\PY{p}{(}\PY{n}{score\PYZus{}fn}\PY{p}{,} \PY{n}{n}\PY{p}{)}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    print words}
+         \PY{l+s+sd}{    for ngram in itertools.chain(words, bigrams): }
+         \PY{l+s+sd}{        if ngram not in stopset: }
+         \PY{l+s+sd}{            print ngram}
+         \PY{l+s+sd}{    exit()}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}    
+             \PY{k}{return} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{ngram}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)} \PY{k}{for} \PY{n}{ngram} \PY{o+ow}{in} \PY{n}{itertools}\PY{o}{.}\PY{n}{chain}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{bigrams}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{bigram\PYZus{}word\PYZus{}feats\PYZus{}stopwords}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{score\PYZus{}fn}\PY{o}{=}\PY{n}{BigramAssocMeasures}\PY{o}{.}\PY{n}{chi\PYZus{}sq}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bigram\PYZus{}finder} \PY{o}{=} \PY{n}{BigramCollocationFinder}\PY{o}{.}\PY{n}{from\PYZus{}words}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+             \PY{n}{bigrams} \PY{o}{=} \PY{n}{bigram\PYZus{}finder}\PY{o}{.}\PY{n}{nbest}\PY{p}{(}\PY{n}{score\PYZus{}fn}\PY{p}{,} \PY{n}{n}\PY{p}{)}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    print words}
+         \PY{l+s+sd}{    for ngram in itertools.chain(words, bigrams): }
+         \PY{l+s+sd}{        if ngram not in stopset: }
+         \PY{l+s+sd}{            print ngram}
+         \PY{l+s+sd}{    exit()}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}    
+             \PY{k}{return} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{ngram}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)} \PY{k}{for} \PY{n}{ngram} \PY{o+ow}{in} \PY{n}{itertools}\PY{o}{.}\PY{n}{chain}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{bigrams}\PY{p}{)} \PY{k}{if} \PY{n}{ngram} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{stopset}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}classifier}\PY{p}{(}\PY{n}{featx}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{negfeats} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{featx}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{word\PYZus{}split}\PY{p}{(}\PY{n}{negdata}\PY{p}{)}\PY{p}{]}
+            \PY{n}{posfeats} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{featx}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{word\PYZus{}split}\PY{p}{(}\PY{n}{posdata}\PY{p}{)}\PY{p}{]}
+            \PY{n}{neufeats} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{featx}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{word\PYZus{}split}\PY{p}{(}\PY{n}{neudata}\PY{p}{)}\PY{p}{]}    
+            
+            \PY{n}{negcutoff} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{negfeats}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}
+            \PY{n}{poscutoff} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{posfeats}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}
+            \PY{n}{neucutoff} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{neufeats}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}
+            
+         
+            \PY{n}{trainfeats} \PY{o}{=} \PY{n}{negfeats}\PY{p}{[}\PY{p}{:}\PY{n}{negcutoff}\PY{p}{]} \PY{o}{+} \PY{n}{posfeats}\PY{p}{[}\PY{p}{:}\PY{n}{poscutoff}\PY{p}{]} \PY{o}{+} \PY{n}{neufeats}\PY{p}{[}\PY{p}{:}\PY{n}{neucutoff}\PY{p}{]}
+            \PY{n}{testfeats} \PY{o}{=} \PY{n}{negfeats}\PY{p}{[}\PY{n}{negcutoff}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{posfeats}\PY{p}{[}\PY{n}{poscutoff}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{neufeats}\PY{p}{[}\PY{n}{neucutoff}\PY{p}{:}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} using 3 classifiers}
+            \PY{n}{classifier\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{svm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{maxent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{decision\PYZus{}tree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}     
+                
+            \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n}{classifier\PYZus{}list}\PY{p}{:}
+                
+                \PY{k}{if} \PY{n}{cl} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{maxent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maximum Entropy}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{algorithm} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{classify}\PY{o}{.}\PY{n}{MaxentClassifier}\PY{o}{.}\PY{n}{ALGORITHMS}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{n}{classifier} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{MaxentClassifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{trainfeats}\PY{p}{,} \PY{n}{algorithm}\PY{p}{,}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{cl} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{svm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{classifier} \PY{o}{=} \PY{n}{SklearnClassifier}\PY{p}{(}\PY{n}{LinearSVC}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                    \PY{n}{classifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{trainfeats}\PY{p}{)}
+                    
+                \PY{k}{elif} \PY{n}{cl} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{decision\PYZus{}tree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decision Tree}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{classifier} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{trainfeats}\PY{p}{,} \PY{n}{binary}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{depth\PYZus{}cutoff}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{support\PYZus{}cutoff}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{entropy\PYZus{}cutoff}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+                    
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Naive Bayes}\PY{l+s+s1}{\PYZsq{}}
+                    \PY{n}{classifier} \PY{o}{=} \PY{n}{NaiveBayesClassifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{trainfeats}\PY{p}{)}
+                    
+                \PY{n}{refsets} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{defaultdict}\PY{p}{(}\PY{n+nb}{set}\PY{p}{)}
+                \PY{n}{testsets} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{defaultdict}\PY{p}{(}\PY{n+nb}{set}\PY{p}{)}
+         
+                \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{feats}\PY{p}{,} \PY{n}{label}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{testfeats}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{refsets}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                        \PY{n}{observed} \PY{o}{=} \PY{n}{classifier}\PY{o}{.}\PY{n}{classify}\PY{p}{(}\PY{n}{feats}\PY{p}{)}
+                        \PY{n}{testsets}\PY{p}{[}\PY{n}{observed}\PY{p}{]}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+         
+                \PY{n}{accuracy} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{classify}\PY{o}{.}\PY{n}{util}\PY{o}{.}\PY{n}{accuracy}\PY{p}{(}\PY{n}{classifier}\PY{p}{,} \PY{n}{testfeats}\PY{p}{)}
+            
+                \PY{n}{pos\PYZus{}precision} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{precision}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n}{pos\PYZus{}recall} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{recall}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n}{pos\PYZus{}fmeasure} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                
+                \PY{n}{neg\PYZus{}precision} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{precision}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n}{neg\PYZus{}recall} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{recall}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n}{neg\PYZus{}fmeasure} \PY{o}{=}  \PY{n}{scores}\PY{o}{.}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                
+                \PY{n}{neu\PYZus{}precision} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{precision}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n}{neu\PYZus{}recall} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{recall}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n}{neu\PYZus{}fmeasure} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SINGLE FOLD RESULT }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{classifierName} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accuracy}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{pos\PYZus{}precision} \PY{o}{+} \PY{n}{neg\PYZus{}precision} \PY{o}{+} \PY{n}{neu\PYZus{}precision}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{3}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{pos\PYZus{}recall} \PY{o}{+} \PY{n}{neg\PYZus{}recall} \PY{o}{+} \PY{n}{neu\PYZus{}recall}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{3}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f\PYZhy{}measure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{pos\PYZus{}fmeasure} \PY{o}{+} \PY{n}{neg\PYZus{}fmeasure} \PY{o}{+} \PY{n}{neu\PYZus{}fmeasure}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{3}\PY{p}{)}    
+                        
+                \PY{c+c1}{\PYZsh{}classifier.show\PYZus{}most\PYZus{}informative\PYZus{}features()}
+            
+            \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{} CROSS VALIDATION}
+            
+            \PY{n}{trainfeats} \PY{o}{=} \PY{n}{negfeats} \PY{o}{+} \PY{n}{posfeats} \PY{o}{+} \PY{n}{neufeats}   
+            
+            \PY{c+c1}{\PYZsh{} SHUFFLE TRAIN SET}
+            \PY{c+c1}{\PYZsh{} As in cross validation, the test chunk might have only negative or only positive data    }
+            \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{trainfeats}\PY{p}{)}    
+            \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} 5\PYZhy{}fold cross\PYZhy{}validation    }
+            
+            \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n}{classifier\PYZus{}list}\PY{p}{:}
+                
+                \PY{n}{subset\PYZus{}size} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trainfeats}\PY{p}{)} \PY{o}{/} \PY{n}{n}\PY{p}{)}
+                \PY{n}{accuracy} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                
+                \PY{n}{pos\PYZus{}precision} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{pos\PYZus{}recall} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{pos\PYZus{}fmeasure} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                
+                \PY{n}{neg\PYZus{}precision} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{neg\PYZus{}recall} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{neg\PYZus{}fmeasure} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                
+                \PY{n}{neu\PYZus{}precision} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{neu\PYZus{}recall} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{neu\PYZus{}fmeasure} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+                \PY{n}{cv\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}        
+                    \PY{n}{testing\PYZus{}this\PYZus{}round} \PY{o}{=} \PY{n}{trainfeats}\PY{p}{[}\PY{n}{i}\PY{o}{*}\PY{n}{subset\PYZus{}size}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{n}{subset\PYZus{}size}\PY{p}{]}
+                    \PY{n}{training\PYZus{}this\PYZus{}round} \PY{o}{=} \PY{n}{trainfeats}\PY{p}{[}\PY{p}{:}\PY{n}{i}\PY{o}{*}\PY{n}{subset\PYZus{}size}\PY{p}{]} \PY{o}{+} \PY{n}{trainfeats}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{subset\PYZus{}size}\PY{p}{:}\PY{p}{]}
+                    
+                    \PY{k}{if} \PY{n}{cl} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{maxent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maximum Entropy}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{n}{algorithm} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{classify}\PY{o}{.}\PY{n}{MaxentClassifier}\PY{o}{.}\PY{n}{ALGORITHMS}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                        \PY{n}{classifier} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{MaxentClassifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{training\PYZus{}this\PYZus{}round}\PY{p}{,} \PY{n}{algorithm}\PY{p}{,}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+                    \PY{k}{elif} \PY{n}{cl} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{svm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{n}{classifier} \PY{o}{=} \PY{n}{SklearnClassifier}\PY{p}{(}\PY{n}{LinearSVC}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                        \PY{n}{classifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{training\PYZus{}this\PYZus{}round}\PY{p}{)}
+                    
+                    \PY{k}{elif} \PY{n}{cl} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{decision\PYZus{}tree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decision Tree}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{n}{classifier} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{training\PYZus{}this\PYZus{}round}\PY{p}{,} \PY{n}{binary}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{depth\PYZus{}cutoff}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{support\PYZus{}cutoff}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{entropy\PYZus{}cutoff}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{classifierName} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Naive Bayes}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{n}{classifier} \PY{o}{=} \PY{n}{NaiveBayesClassifier}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{training\PYZus{}this\PYZus{}round}\PY{p}{)}
+                            
+                    \PY{n}{refsets} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{defaultdict}\PY{p}{(}\PY{n+nb}{set}\PY{p}{)}
+                    \PY{n}{testsets} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{defaultdict}\PY{p}{(}\PY{n+nb}{set}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{feats}\PY{p}{,} \PY{n}{label}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{testing\PYZus{}this\PYZus{}round}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{refsets}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                        \PY{n}{observed} \PY{o}{=} \PY{n}{classifier}\PY{o}{.}\PY{n}{classify}\PY{p}{(}\PY{n}{feats}\PY{p}{)}
+                        \PY{n}{testsets}\PY{p}{[}\PY{n}{observed}\PY{p}{]}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                    
+                    \PY{n}{cv\PYZus{}accuracy} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{classify}\PY{o}{.}\PY{n}{util}\PY{o}{.}\PY{n}{accuracy}\PY{p}{(}\PY{n}{classifier}\PY{p}{,} \PY{n}{testing\PYZus{}this\PYZus{}round}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}pos\PYZus{}precision} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{precision}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}pos\PYZus{}recall} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{recall}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}pos\PYZus{}fmeasure} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    
+                    \PY{n}{cv\PYZus{}neg\PYZus{}precision} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{precision}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}neg\PYZus{}recall} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{recall}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}neg\PYZus{}fmeasure} \PY{o}{=}  \PY{n}{scores}\PY{o}{.}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    
+                    \PY{n}{cv\PYZus{}neu\PYZus{}precision} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{precision}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}neu\PYZus{}recall} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{recall}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{cv\PYZus{}neu\PYZus{}fmeasure} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{refsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{testsets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                            
+                    \PY{n}{accuracy}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}accuracy}\PY{p}{)}
+                    \PY{n}{pos\PYZus{}precision}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}pos\PYZus{}precision}\PY{p}{)}
+                    \PY{n}{pos\PYZus{}recall}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}pos\PYZus{}recall}\PY{p}{)}
+                    \PY{n}{pos\PYZus{}fmeasure}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}pos\PYZus{}fmeasure}\PY{p}{)}
+        
+                    \PY{n}{neg\PYZus{}precision}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}neg\PYZus{}precision}\PY{p}{)}
+                    \PY{n}{neg\PYZus{}recall}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}neg\PYZus{}recall}\PY{p}{)}
+                    \PY{n}{neg\PYZus{}fmeasure}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}neg\PYZus{}fmeasure}\PY{p}{)}
+                    
+                    \PY{n}{neu\PYZus{}precision}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}neu\PYZus{}precision}\PY{p}{)}
+                    \PY{n}{neu\PYZus{}recall}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}neu\PYZus{}recall}\PY{p}{)}
+                    \PY{n}{neu\PYZus{}fmeasure}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cv\PYZus{}neu\PYZus{}fmeasure}\PY{p}{)}
+                    
+                    \PY{n}{cv\PYZus{}count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N\PYZhy{}FOLD CROSS VALIDATION RESULT }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{classifierName} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{accuracy}\PY{p}{)} \PY{o}{/} \PY{n}{n}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{pos\PYZus{}precision}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{o}{+} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{neg\PYZus{}precision}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{o}{+} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{neu\PYZus{}precision}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{3}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{pos\PYZus{}recall}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{o}{+} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{neg\PYZus{}recall}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{o}{+} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{neu\PYZus{}precision}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{3}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f\PYZhy{}measure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{pos\PYZus{}fmeasure}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{o}{+} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{neg\PYZus{}fmeasure}\PY{p}{)}\PY{o}{/}\PY{n}{n} \PY{o}{+} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{neu\PYZus{}fmeasure}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{3}\PY{p}{)}
+                \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+                
+        \PY{n}{evaluate\PYZus{}classifier}\PY{p}{(}\PY{n}{word\PYZus{}feats}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+---------------------------------------
+SINGLE FOLD RESULT (Naive Bayes)
+---------------------------------------
+accuracy: 0.8265844356082123
+precision 0.839354629970456
+recall 0.7951298332766817
+f-measure 0.8073270378757568
+
+---------------------------------------
+SINGLE FOLD RESULT (SVM)
+---------------------------------------
+accuracy: 0.9440882901890774
+precision 0.9436332677323206
+recall 0.9375426294598688
+f-measure 0.9403845871784844
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.390
+             2          -1.09837        0.709
+         Final          -1.09813        0.709
+
+---------------------------------------
+SINGLE FOLD RESULT (Maximum Entropy)
+---------------------------------------
+accuracy: 0.7040493386350726
+precision 0.7968633166187084
+recall 0.6097840360061556
+f-measure 0.5583554767994044
+
+---------------------------------------
+SINGLE FOLD RESULT (Decision Tree)
+---------------------------------------
+accuracy: 0.6403473180232087
+precision 0.6932039613132183
+recall 0.5698891874786532
+f-measure 0.5553640139663818
+
+---------------------------------------
+N-FOLD CROSS VALIDATION RESULT (Naive Bayes)
+---------------------------------------
+accuracy: 0.812114448051948
+precision 0.8236923385180206
+recall 0.8650559542061251
+f-measure 0.7936837514920416
+
+---------------------------------------
+N-FOLD CROSS VALIDATION RESULT (SVM)
+---------------------------------------
+accuracy: 0.9307426948051949
+precision 0.928798952925708
+recall 0.9352912171295626
+f-measure 0.9262325267657779
+
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.390
+             2          -1.09837        0.707
+         Final          -1.09813        0.707
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.390
+             2          -1.09837        0.707
+         Final          -1.09813        0.707
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.389
+             2          -1.09837        0.704
+         Final          -1.09813        0.704
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.389
+             2          -1.09837        0.704
+         Final          -1.09813        0.704
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.392
+             2          -1.09837        0.708
+         Final          -1.09813        0.708
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.391
+             2          -1.09837        0.707
+         Final          -1.09813        0.707
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.391
+             2          -1.09837        0.707
+         Final          -1.09813        0.707
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.390
+             2          -1.09837        0.705
+         Final          -1.09813        0.705
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.389
+             2          -1.09837        0.707
+         Final          -1.09813        0.707
+  ==> Training (3 iterations)
+
+      Iteration    Log Likelihood    Accuracy
+      ---------------------------------------
+             1          -1.09861        0.390
+             2          -1.09837        0.705
+         Final          -1.09813        0.705
+---------------------------------------
+N-FOLD CROSS VALIDATION RESULT (Maximum Entropy)
+---------------------------------------
+accuracy: 0.6884943181818183
+precision 0.7872849826472238
+recall 0.903303186040418
+f-measure 0.5465321298406185
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
