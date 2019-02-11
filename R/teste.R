@@ -1,9 +1,9 @@
-library(tidyverse) # pq nao da pra viver sem
+library(tidyverse) 
 library(ggExtra)
-library(magrittr) # <3
+library(magrittr) 
 library(lubridate)
-library(stringr) # essencial para trabalhar com textos
-library(tidytext) # um dos melhores pacotes para text mining
+library(stringr) 
+library(tidytext) 
 library(lexiconPT)
 
 data("oplexicon_v3.0")
